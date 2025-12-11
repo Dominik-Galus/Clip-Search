@@ -1,0 +1,32 @@
+[project]
+name = "clip-search"
+version = "0.1.0"
+description = "Clip video search"
+readme = "README.md"
+authors = [
+    { name = "Dominik Galus", email = "dominikgalus9@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+preview = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "I", "B", "ANN"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
