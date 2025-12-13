@@ -47,6 +47,7 @@ def main() -> None:
         callbacks=[checkpoint_callback, lr_monitor],
         precision="16-mixed",
         log_every_n_steps=1,
+        accumulate_grad_batches=8,
     )
 
     trainer.fit(model, datamodule=dm)
