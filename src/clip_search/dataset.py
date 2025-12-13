@@ -12,6 +12,7 @@ class DatasetResult(TypedDict):
     video: torch.Tensor
     label: int
     text: str
+    path: str
 
 
 class VideoDataset(Dataset):
@@ -98,6 +99,7 @@ class VideoDataset(Dataset):
             "video": video_tensor,  # Shape: [3, 8, 224, 224]
             "label": label,
             "text": f"A video of {class_name}",
+            "path": str(item),
         }
 
     def __len__(self) -> int:
