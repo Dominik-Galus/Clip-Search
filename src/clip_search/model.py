@@ -10,7 +10,7 @@ CONFIG = CLIPConfig()
 class VideoSearchEngine(nn.Module):
     def __init__(self, model_name: str = "openai/clip-vit-base-patch32", freeze_backbone: bool = True) -> None:
         super().__init__()
-        self.clip_model = CLIPModel.from_pretrained(model_name)
+        self.clip_model = CLIPModel.from_pretrained(model_name, use_safetensors=True)
 
         if freeze_backbone:
             self._freeze_params()
