@@ -1,4 +1,4 @@
-import albumentations as A
+import albumentations
 import av
 import numpy as np
 import torch
@@ -7,7 +7,7 @@ from transformers import CLIPTokenizer
 from clip_search.module import VideoSearchLightningModule
 
 
-def load_video(path: str, transform: A.Compose, segments: int = 8) -> torch.Tensor:
+def load_video(path: str, transform: albumentations.Compose, segments: int = 8) -> torch.Tensor:
     transformed_frames: list[np.ndarray] = []
     with av.open(path) as container:
         stream = container.streams.video[0]
@@ -48,8 +48,8 @@ def load_video(path: str, transform: A.Compose, segments: int = 8) -> torch.Tens
 
 
 def main() -> None:
-    checkpoint_path = "best.ckpt"
-    video_path = "data/test/TennisSwing/v_TennisSwing_g01_c06.avi"
+    checkpoint_path = "best2.ckpt"
+    video_path = "data/test1/TennisSwing/v_TennisSwing_g01_c06.avi"
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -57,9 +57,9 @@ def main() -> None:
     model.eval()
     model.to(device)
 
-    transform = A.Compose([
-        A.Resize(224, 224),
-        A.Normalize()
+    transform = albumentations.Compose([
+        albumentations.Resize(224, 224),
+        albumentations.Normalize()
     ])
 
     video_tensor = load_video(video_path, transform=transform).unsqueeze(0).to(device)
@@ -72,8 +72,8 @@ def main() -> None:
         "A video of slicing vegetables"
     ]
 
-    tokenizer = CLIPTokenizer.from_pretrained(model.hparams.model_name)
-    inputs = tokenizer(texts, padding=True, truncation=True, return_tensors="pt").to(device)
+    tokenizer = CLIPTokenizer.from_pretrained(model.model_name)
+    inputs = tokenizer(texts, padding=True, truncation=True, return_tensors="pt").to(device)  # pyrefly: ignore
 
     with torch.no_grad():
         image_features, text_features = model(

@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Literal, TypedDict
 
-import albumentations as A
+import albumentations
 import av
 import numpy as np
 import torch
@@ -23,7 +23,7 @@ class VideoDataset(Dataset):
     def __init__(
         self,
         root_dir: Path,
-        transform: A.ReplayCompose | None = None,
+        transform: albumentations.ReplayCompose | None = None,
         mode: Literal["train", "val", "test"] = "train",
         segments: int = 8,
     ) -> None:
@@ -35,19 +35,19 @@ class VideoDataset(Dataset):
         self.images_path = sorted((root_dir / mode).rglob("*.avi"))
         if transform is None:
             if mode == "train":
-                self.transform = A.ReplayCompose([
-                    A.Resize(256, 256),
-                    A.RandomCrop(224, 224),
-                    A.HorizontalFlip(p=0.5),
-                    A.Normalize(
+                self.transform = albumentations.ReplayCompose([
+                    albumentations.Resize(256, 256),
+                    albumentations.RandomCrop(224, 224),
+                    albumentations.HorizontalFlip(p=0.5),
+                    albumentations.Normalize(
                         mean=MEAN,
                         std=STD,
                     ),
                 ])
             else:
-                self.transform = A.ReplayCompose([
-                    A.Resize(224, 224),
-                    A.Normalize(
+                self.transform = albumentations.ReplayCompose([
+                    albumentations.Resize(224, 224),
+                    albumentations.Normalize(
                         mean=MEAN,
                         std=STD,
                     ),

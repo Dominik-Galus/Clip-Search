@@ -1,0 +1,24 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000" 
+    volumes:
+      - ./data:/app/data
+      - ./best2.ckpt:/app/best.ckpt
+      - ./paths.json:/app/paths.json
+      - ./vector.index:/app/vector.index
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      INTERNAL_API_URL: http://api:8000/search
+      PUBLIC_API_URL: http://localhost:8000/
+    depends_on:
+      - api

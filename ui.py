@@ -1,7 +1,10 @@
+import os
+
 import requests
 import streamlit as st
 
-API_URL = "http://127.0.0.1:8000/search"
+INTERNAL_API_URL = os.environ.get("INTERNAL_API_URL", "http://127.0.0.1:8000/search")
+PUBLIC_API_URL = os.environ.get("PUBLIC_API_URL", "http://127.0.0.1:8000/search/")
 
 st.set_page_config(page_title="Clip Video Search", layout="wide")
 
@@ -12,7 +15,10 @@ with st.sidebar:
     st.header("Settings")
     k_search = st.slider("Amount of results", min_value=1, max_value=10, value=4)
 
-query = st.text_input("Give description of the video you are searching for:", placeholder="for example: playing tennis, cutting vegetables")
+query = st.text_input(
+    "Give description of the video you are searching for:",
+    placeholder="for example: playing tennis, cutting vegetables"
+)
 
 if st.button("Search") or query:
     if not query:
@@ -21,7 +27,7 @@ if st.button("Search") or query:
         with st.spinner(f"Searching video for: '{query}'"):
             try:
                 response = requests.post(
-                    API_URL,
+                    INTERNAL_API_URL,
                     json={"query": query, "k_search": k_search},
                     timeout=10
                 )
@@ -38,6 +44,7 @@ if st.button("Search") or query:
                     for idx, (video_path, score) in enumerate(zip(videos, distances, strict=False)):
                         col = cols[idx % 2]
                         video_path = video_path.replace(".avi", ".mp4")
+                        video_path = PUBLIC_API_URL + video_path
                         with col:
                             st.subheader(f"Result #{idx + 1} (Score: {score:.3f})")
                             st.text(video_path)

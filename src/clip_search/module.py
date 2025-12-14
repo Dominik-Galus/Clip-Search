@@ -9,9 +9,12 @@ class VideoSearchLightningModule(pl.LightningModule):
     def __init__(self, model_name: str, learning_rate: float, weight_decay: float) -> None:
         super().__init__()
         self.save_hyperparameters()
+        self.learning_rate = learning_rate
+        self.weight_decay = weight_decay
+        self.model_name = model_name
         self.model = VideoSearchEngine(model_name)
 
-    def forward(
+    def forward(  # pyrefly: ignore
         self,
         pixel_values: torch.Tensor,
         input_ids: torch.Tensor,
@@ -22,13 +25,13 @@ class VideoSearchLightningModule(pl.LightningModule):
     def configure_optimizers(self) -> torch.optim.Optimizer:
         optimizer = torch.optim.AdamW(
             self.model.parameters(),
-            lr=self.hparams.learning_rate,
-            weight_decay=self.hparams.weight_decay,
+            lr=self.learning_rate,
+            weight_decay=self.weight_decay,
         )
 
         return optimizer
 
-    def training_step(self, batch: dict[str, torch.Tensor], batch_idx: int) -> torch.Tensor:
+    def training_step(self, batch: dict[str, torch.Tensor], batch_idx: int) -> torch.Tensor:  # pyrefly: ignore
         pixel_values, input_ids, attention_mask = (
             batch["pixel_values"],
             batch["input_ids"],
@@ -54,7 +57,7 @@ class VideoSearchLightningModule(pl.LightningModule):
 
         return total_loss
 
-    def validation_step(self, batch: dict[str, torch.Tensor], batch_idx: int) -> torch.Tensor:
+    def validation_step(self, batch: dict[str, torch.Tensor], batch_idx: int) -> torch.Tensor:  # pyrefly: ignore
         pixel_values, input_ids, attention_mask = (
             batch["pixel_values"],
             batch["input_ids"],

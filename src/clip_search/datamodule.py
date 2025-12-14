@@ -30,7 +30,7 @@ class VideoDataModule(pl.LightningDataModule):
 
         pixel_values = torch.stack(videos)
 
-        text_inputs = self.tokenizer(
+        text_inputs = self.tokenizer(  # pyrefly: ignore
             texts,
             padding=True,
             truncation=True,

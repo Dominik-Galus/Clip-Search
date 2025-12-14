@@ -11,7 +11,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from torch.nn import functional as F
+from torch.nn import functional
 from transformers import CLIPTokenizer
 from typing_extensions import TypedDict
 import faiss
@@ -47,7 +47,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
     model.eval()
     model.to(device)
 
-    tokenizer = CLIPTokenizer.from_pretrained(model.hparams.model_name)
+    tokenizer = CLIPTokenizer.from_pretrained(model.model_name)
     indexer = faiss.read_index("vector.index")
 
     app.state.resources = {
@@ -88,7 +88,7 @@ def search(request: Request, search_request: SearchRequest) -> SearchResponse:
             attention_mask=inputs["attention_mask"]
         )
 
-        normalized_query = F.normalize(text_features, dim=1)
+        normalized_query = functional.normalize(text_features, dim=1)
 
         query_vector = normalized_query.detach().cpu().numpy().astype("float32")
 
@@ -98,7 +98,7 @@ def search(request: Request, search_request: SearchRequest) -> SearchResponse:
     for idx in ids[0]:
         if idx == -1:
             continue
-        found_paths.append(str(request.base_url) + resources["mapping"][str(idx)])
+        found_paths.append(resources["mapping"][str(idx)])
 
     return SearchResponse(
         videos=found_paths,

@@ -462,6 +462,7 @@ dependencies = [
     { name = "lightning" },
     { name = "matplotlib" },
     { name = "pydantic" },
+    { name = "pyrefly" },
     { name = "streamlit" },
     { name = "tensorboard" },
     { name = "torch" },
@@ -480,6 +481,7 @@ requires-dist = [
     { name = "lightning", specifier = ">=2.6.0" },
     { name = "matplotlib", specifier = ">=3.10.8" },
     { name = "pydantic", specifier = ">=2.12.5" },
+    { name = "pyrefly", specifier = ">=0.45.2" },
     { name = "streamlit", specifier = ">=1.52.1" },
     { name = "tensorboard", specifier = ">=2.20.0" },
     { name = "torch", specifier = ">=2.9.1" },
@@ -2452,6 +2454,22 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f2/a5/181488fc2b9d093e3972d2a472855aae8a03f000592dbfce716a512b3359/pyparsing-3.2.5.tar.gz", hash = "sha256:2df8d5b7b2802ef88e8d016a2eb9c7aeaa923529cd251ed0fe4608275d4105b6", size = 1099274 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/10/5e/1aa9a93198c6b64513c9d7752de7422c06402de6600a8767da1524f9570b/pyparsing-3.2.5-py3-none-any.whl", hash = "sha256:e38a4f02064cf41fe6593d328d0512495ad1f3d8a91c4f73fc401b3079a59a5e", size = 113890 },
+]
+
+[[package]]
+name = "pyrefly"
+version = "0.45.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ce/1f/f9a64686ccc487906f97fb55a155875e600634a96f506a9b764b7c58fbb1/pyrefly-0.45.2.tar.gz", hash = "sha256:3f2f011e3fe6ed6662c8aab86c05365336b2bb07d44852fe7428be61239a9fe1", size = 5055002 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/50/b8/67798a7db5520fa85420e270f323dc091d5fd73a492eaf8c143d14fc9859/pyrefly-0.45.2-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:33467adbb9aa4993666a1e3dcb35d00facdea1750692ccb2a07fdb9204cf1f10", size = 11194425 },
+    { url = "https://files.pythonhosted.org/packages/c2/1b/f5f36b053f2b31e1c3348e259dfa9dd17fbf796b782a3de530ededa5ce9a/pyrefly-0.45.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:5eded1227406f57cffe240c232fbee6f585f9441709b9e1cfb994a6b175a28cf", size = 10787764 },
+    { url = "https://files.pythonhosted.org/packages/23/49/a6528dac16638748e60c31768aa591b6cfef5a5cd917693937a075daccfa/pyrefly-0.45.2-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f2007e49807f6564505615fa7422a3278c58aa648e2b8b2d9b89ea04cf4ce5dc", size = 11035893 },
+    { url = "https://files.pythonhosted.org/packages/3a/ea/46e48be259e6e003ee4c9d2d4151df5204924e3b1f81a61401145b2e0c9a/pyrefly-0.45.2-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f49ec5535b3a4c6f342d6429439e078c1344ff4a5d2592fd05bc51d1d748e5d4", size = 11903460 },
+    { url = "https://files.pythonhosted.org/packages/c4/72/573457118d41cdd20d5ed09d4a2bc8bd692ab18a08bf3a450c239d041fe4/pyrefly-0.45.2-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:597a3e0f8eb3ffe798368906cf14edacafe73c336ce8ee83c80f2a259a2c8f2b", size = 11534889 },
+    { url = "https://files.pythonhosted.org/packages/b8/a5/a2eea3093b20d7a02fcf23419c99c31a7ebc95c25ba70746c1dc8eb93fbd/pyrefly-0.45.2-py3-none-win32.whl", hash = "sha256:a71a9efcba0cc8afacee248430c27a7d76ea9ff0f8c6d975329a5c6deabbb682", size = 10956305 },
+    { url = "https://files.pythonhosted.org/packages/a9/fb/30a6bbee4a89812644621ecfcbe830d4f6e8c519c6e722d09691fe59434c/pyrefly-0.45.2-py3-none-win_amd64.whl", hash = "sha256:d48b92c619a217bc4992b4899bf0eac3d049344a235e4d566088e6476b3d027e", size = 11632887 },
+    { url = "https://files.pythonhosted.org/packages/67/4f/ab7daab11f1abb0b5ebb8b343c834f87930f651e5b811cc55eaa51a03c0f/pyrefly-0.45.2-py3-none-win_arm64.whl", hash = "sha256:b1678936383471076c99c12fe15ebe1f9bc7ada5f499f40b01d9c934c1c8308f", size = 11184966 },
 ]
 
 [[package]]

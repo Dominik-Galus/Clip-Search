@@ -5,7 +5,7 @@ from einops import rearrange
 import numpy as np
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import torch.nn.functional as F
+from torch.nn import functional
 
 from clip_search.module import VideoSearchLightningModule
 from clip_search.dataset import VideoDataset
@@ -51,7 +51,7 @@ def create_vector_index(
     all_embeddings = []
     all_paths = []
 
-    for batch in tqdm(dataloader):
+    for batch in tqdm(dataloader):  # pyrefly: ignore
         video = batch["pixel_values"].to(device)
         paths = batch["paths"]
 
@@ -61,12 +61,12 @@ def create_vector_index(
 
             video_features = clip_model.clip_model.get_image_features(video_reshaped)
 
-            video_features = F.normalize(video_features, dim=1)
+            video_features = functional.normalize(video_features, dim=1)
 
             video_features = rearrange(video_features, "(b t) d -> b t d", b=b, t=t)
             video_features = video_features.mean(dim=1)
 
-            video_features = F.normalize(video_features, dim=1)
+            video_features = functional.normalize(video_features, dim=1)
 
         emb = video_features.cpu().numpy().astype("float32")
 
@@ -77,7 +77,7 @@ def create_vector_index(
 
     d = final_embeddings.shape[1]
     index = faiss.IndexFlatIP(d)
-    index.add(final_embeddings)
+    index.add(final_embeddings)  # pyrefly: ignore
 
     faiss.write_index(index, "vector.index")
 
