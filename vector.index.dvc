@@ -1,0 +1,5 @@
+outs:
+- md5: fb76b8c381ce883a5bef2067a7fc250a
+  size: 3528749
+  hash: md5
+  path: vector.index

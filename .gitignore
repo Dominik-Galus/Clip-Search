@@ -10,3 +10,6 @@ wheels/
 .venv
 data
 .DS_Store
+/best.ckpt
+/vector.index
+/paths.json
