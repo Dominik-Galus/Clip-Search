@@ -8,7 +8,8 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 import torch  # noqa: I001
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from torch.nn import functional as F
 from transformers import CLIPTokenizer
@@ -63,15 +64,16 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
 
 
 app = FastAPI(lifespan=lifespan)
+app.mount("/data", StaticFiles(directory="data"), name="data")
 
 
 @app.post("/search")
-def search(request: SearchRequest) -> SearchResponse:
+def search(request: Request, search_request: SearchRequest) -> SearchResponse:
     resources = app.state.resources
     device = resources["device"]
 
     inputs = resources["tokenizer"](
-        request.query,
+        search_request.query,
         padding=True,
         truncation=True,
         max_length=77,
@@ -90,13 +92,13 @@ def search(request: SearchRequest) -> SearchResponse:
 
         query_vector = normalized_query.detach().cpu().numpy().astype("float32")
 
-    distances, ids = resources["indexer"].search(query_vector, request.k_search)
+    distances, ids = resources["indexer"].search(query_vector, search_request.k_search)
 
     found_paths = []
     for idx in ids[0]:
         if idx == -1:
             continue
-        found_paths.append(resources["mapping"][str(idx)])
+        found_paths.append(str(request.base_url) + resources["mapping"][str(idx)])
 
     return SearchResponse(
         videos=found_paths,
