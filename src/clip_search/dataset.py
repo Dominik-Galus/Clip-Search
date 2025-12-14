@@ -7,6 +7,10 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
+# The same as CLIP
+MEAN: tuple[float, float, float] = (0.48145466, 0.4578275, 0.40821073)
+STD: tuple[float, float, float] = (0.26862954, 0.26130258, 0.27577711)
+
 
 class DatasetResult(TypedDict):
     video: torch.Tensor
@@ -35,10 +39,18 @@ class VideoDataset(Dataset):
                     A.Resize(256, 256),
                     A.RandomCrop(224, 224),
                     A.HorizontalFlip(p=0.5),
+                    A.Normalize(
+                        mean=MEAN,
+                        std=STD,
+                    ),
                 ])
             else:
                 self.transform = A.ReplayCompose([
                     A.Resize(224, 224),
+                    A.Normalize(
+                        mean=MEAN,
+                        std=STD,
+                    ),
                 ])
         else:
             self.transform = transform
