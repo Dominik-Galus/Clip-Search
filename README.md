@@ -1,8 +1,8 @@
 # CLIP Search Project
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0-orange)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.109-green)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.9.1-orange)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.124.4-green)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
 ![DVC](https://img.shields.io/badge/DVC-Data_Version_Control-purple)
 
@@ -29,6 +29,7 @@ ML & Data:
 - Transformers (Hugging Face) - CLIP model architecture and tokenization.
 - FAISS (Facebook AI Similarity Search) - Vector database for dense retrieval.
 - Albumentations & PyAV - Video processing and data augmentation pipeline.
+- Hydra - Hierarchical configuration for training loop.
 
 Backend & Frontend:
 - FastAPI - Async REST API with Lifespan events.

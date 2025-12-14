@@ -1,0 +1,4 @@
+_target_: src.clip_search.module.VideoSearchLightningModule
+model_name: "openai/clip-vit-base-patch32"
+learning_rate: 1e-4
+weight_decay: 1e-2

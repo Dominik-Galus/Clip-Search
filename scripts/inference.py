@@ -48,8 +48,8 @@ def load_video(path: str, transform: albumentations.Compose, segments: int = 8) 
 
 
 def main() -> None:
-    checkpoint_path = "best2.ckpt"
-    video_path = "data/test1/TennisSwing/v_TennisSwing_g01_c06.avi"
+    checkpoint_path = "../best.ckpt"
+    video_path = "../data/test1/TennisSwing/v_TennisSwing_g01_c06.avi"
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 

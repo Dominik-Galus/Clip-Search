@@ -1,0 +1,16 @@
+defaults:
+  - _self_
+  - model: clip_base
+  - data: ucf101
+
+trainer:
+  max_epochs: 10
+  accelerator: "auto"
+  devices: 1
+  check_val_every_n_epoch: 1
+  precision: "16-mixed"
+  accumulate_grad_batches: 8
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S}
