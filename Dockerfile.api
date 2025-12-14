@@ -9,10 +9,10 @@ COPY requirements-api.txt ./
 RUN pip install --no-cache-dir -r requirements-api.txt
 
 COPY src ./src
-COPY scripts/app.py ./
+COPY scripts/app.py ./scripts/app.py
 
 EXPOSE 8000
 
 ENV PYTHONPATH=/app/src
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "scripts.app:app", "--host", "0.0.0.0", "--port", "8000"]

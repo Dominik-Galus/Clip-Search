@@ -4,7 +4,6 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.9.1-orange)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.124.4-green)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue)
-![DVC](https://img.shields.io/badge/DVC-Data_Version_Control-purple)
 
 This is an end-to-end Machine Learning system that allows searching through video collections using natural language queries (e.g., *"a person playing tennis"*).
 
@@ -20,29 +19,7 @@ It leverages **Contrastive Learning (CLIP)** to understand video content and **F
 - MLOps & Deployment:
   - Docker: Multi-stage builds optimized for CPU inference (separated API and UI containers).
   - CI/CD: GitHub Actions pipeline with ruff linting, pyrefly type checking, and Docker build verification.
-  - DVC: Data Version Control used for tracking heavy artifacts (weights, datasets) and replicating the environment.
 - Robustness: Traffic control using Locust.
-
-## Tech Stack
-ML & Data:
-- PyTorch & PyTorch Lightning - Deep Learning framework and training loop abstraction.
-- Transformers (Hugging Face) - CLIP model architecture and tokenization.
-- FAISS (Facebook AI Similarity Search) - Vector database for dense retrieval.
-- Albumentations & PyAV - Video processing and data augmentation pipeline.
-- Hydra - Hierarchical configuration for training loop.
-
-Backend & Frontend:
-- FastAPI - Async REST API with Lifespan events.
-- Streamlit - Rapid UI prototyping.
-- Uvicorn - ASGI Server.
-
-MLOps & DevOps:
-- Docker & Docker Compose - Containerization and multi-service orchestration.
-- GitHub Actions - CI pipeline (Linting, Type Checking, Build Verification).
-- DVC (Data Version Control) - Artifact and dataset versioning.
-- Locust - Load testing and performance benchmarking.
-- Ruff & PyRefly - Code quality and static type analysis.
-- uv - Blazing fast Python package and project manager.
 
 ## Installation
 ### Prerequisites
@@ -55,16 +32,13 @@ MLOps & DevOps:
 ```bash
 git clone git@github.com:Dominik-Galus/Clip-Search.git
 ```
-3. Pull data and Models (DVC):
-```bash
-# Currently it is only on my local machine but ideally it would be on some kind of cloud
-dvc pull
-```
-3. Launch system:
+3. Pull data and Models from: [drive](https://drive.google.com/drive/u/0/folders/1vJ-tq6D-AUZCwXU9cHsdAVnU6WjYDWo2):
+
+4. Launch system:
 ```bash
 docker-compose up --build
 ```
-4. Access:
+5. Access:
    - Frontend: http://localhost:8501
    - API Docs: http://localhost:8000/docs
   
@@ -77,12 +51,12 @@ uv sync
 
 2. Run API:
 ```bash
-uv run uvicorn app:app --reload
+uv run uvicorn scripts.app:app --reload
 ```
 
 3. Run UI:
 ```bash
-uv run streamlit run ui.py
+uv run streamlit run scripts/ui.py
 ```
 
 # UI

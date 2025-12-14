@@ -7,9 +7,9 @@ services:
       - "8000:8000" 
     volumes:
       - ./data:/app/data
-      - ./best.ckpt:/app/best.ckpt
-      - ./paths.json:/app/paths.json
-      - ./vector.index:/app/vector.index
+      - ./models/best.ckpt:/app/models/best.ckpt
+      - ./indexes/paths.json:/app/indexes/paths.json
+      - ./indexes/vector.index:/app/indexes/vector.index
 
   ui:
     build:

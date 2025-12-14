@@ -39,16 +39,16 @@ class SearchResponse(BaseModel):
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, Any]:
-    with open("./paths.json") as f:
+    with open("./indexes/paths.json") as f:
         data = json.load(f)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = VideoSearchLightningModule.load_from_checkpoint("best.ckpt")
+    model = VideoSearchLightningModule.load_from_checkpoint("models/best.ckpt")
     model.eval()
     model.to(device)
 
     tokenizer = CLIPTokenizer.from_pretrained(model.model_name)
-    indexer = faiss.read_index("vector.index")
+    indexer = faiss.read_index("indexes/vector.index")
 
     app.state.resources = {
         "model": model,
