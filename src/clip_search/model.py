@@ -2,7 +2,7 @@ import torch
 from einops import rearrange
 from torch import nn
 from torch.nn import functional
-from transformers import CLIPConfig, CLIPModel, CLIPTokenizer
+from transformers import CLIPConfig, CLIPModel
 
 CONFIG = CLIPConfig()
 
